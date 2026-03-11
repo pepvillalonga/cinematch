@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineMatch</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>CineMatch</h1>
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Buscar series...">
+            <button id="search-btn">Buscar</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="filters" id="filters">
+            <button class="filter-btn active" data-genre="all">Todas</button>
+        </div>
+
+        <h2 id="section-title">Series Populares</h2>
+        <div class="shows-grid" id="shows-grid"></div>
+    </main>
+
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal">
+            <button class="modal-close" id="modal-close">&times;</button>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>CineMatch - Pep Villalonga</p>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
