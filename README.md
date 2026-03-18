@@ -1,32 +1,33 @@
 # CineMatch - Proyecto de clase
 
-La idea es hacer un buscador de series. De momento solo tengo montada la estructura básica en el HTML y poco a poco iré metiendo el diseño y la funcionalidad.
+Este es mi proyecto para clase. Se trata de un buscador de series interactivo donde puedes ver series populares, buscar por nombre, filtrarlas por género y ver detalles concretos de cada una en una ventana flotante. Todo está hecho desde cero con HTML, CSS y JavaScript.
 
-## Lo que tengo hecho de momento (HTML):
+## 1. La estructura (HTML)
 
-He dividido la página en varias partes lógicas para luego poder darle estilo fácil:
+He dividido el archivo `index.html` en partes lógicas para que el código quede limpio y sea fácil aplicarle estilos después:
 
-1. **Cabecera (Head):** He puesto lo básico para que se adapte al móvil y he dejado preparado el enlace a mi futuro `style.css`.
-2. **Header visible:** El título de la web y una barra con un input y un botón para buscar series.
-3. **Main:** Es el contenedor principal. Aquí he dejado:
-   - Un div `filters` donde luego meteré botones para filtrar (Acción, Comedia...).
-   - Un div vacío `shows-grid` que es donde se van a cargar todas las series.
-4. **Modal:** He metido un div oculto (`modal-overlay`) que tiene la estructura de una ventana flotante. Así cuando hagamos click en una serie, se abrirá por encima.
-5. **Footer:** Un pequeño texto abajo del todo.
+- **Header:** El título principal y una barra de búsqueda con un input y un botón.
+- **Main:** El contenedor principal. Dentro tiene:
+  - Un div `filters` donde el JS inyecta todos los botones de las categorías.
+  - Un contenedor `shows-grid` que está vacío en el HTML, funciona como un lienzo donde el JS va añadiendo las tarjetas de las series según llegan de la API.
+- **Modal:** Un div oculto (`modal-overlay`) preparado para funcionar como ventana flotante. Tiene la estructura básica vacía (imagen, títulos, resumen) esperando a que el JS la rellene al hacer clic en una serie.
+- **Footer:** Un pequeño pie de página.
 
-## Lo próximo que haré:
+## 2. El diseño (CSS) - ¡Pendiente para más adelante!
 
-### Fase 1: Darle estilo (CSS)
-En la próxima clase voy a crear el `style.css`. Mi plan es:
-- Poner un fondo oscuro para que parezca de cine.
-- Usar variables CSS para que los colores cuadren bien en todos lados.
-- Usar CSS Grid en el div `shows-grid` para que las series se pongan en columnas y se adapten al tamaño de la pantalla (responsive).
-- Darle forma de "tarjeta" a cada serie y esconder el modal hasta que haga falta.
+De momento la página se ve un poco fea porque solo tiene el HTML puro. En las próximas clases me encargaré de crear el archivo `style.css` para darle un diseño moderno y oscuro. Mi idea para cuando lo haga es:
 
-### Fase 2: Darle vida (JavaScript)
-Por último, crearé el `main.js`.
-- Haré un `fetch` a la API pública de TVMaze para traerme series.
-- Usaré Javascript para crear elementos HTML dinámicos pidiendo su póster y título, y metiéndolos físicamente dentro de mi `shows-grid`.
-- Añadiré un evento al botón de buscar para pedirle otras series a la API.
-- Haré que al pulsar en una tarjeta se abra el modal que he dejado preparado en el HTML (cambiándole la clase o el display por CSS) con el resumen de la serie.
+- Usar variables CSS para definir una buena paleta de colores.
+- Usar Flexbox para alinear el buscador y los filtros.
+- Usar CSS Grid para que las tarjetas de las series se adapten a cualquier tamaño de pantalla.
 
+## 3. La funcionalidad (JavaScript)
+
+En `main.js` está la lógica que conecta la web con la API pública de **TVMaze**. Aquí no hay librerías externas ni nada raro, todo es JavaScript puro:
+
+- **Carga inicial:** Nada más abrir la web, se ejecuta la función `cargarSeries()`. Hace un `fetch` a la API, se trae los datos de las series más populares, coge las 40 primeras y llama a `mostrarSeries()` para crear el HTML dinámicamente y meterlo en pantalla.
+- **Filtros dinámicos:** La función `crearFiltros()` repasa todas las series descargadas, extrae todos los géneros que existen y crea un botón para cada uno. Al pulsarlos, oculta las series que no coinciden y deja solo las de ese género.
+- **Buscador:** Puedes buscar escribiendo el nombre y pulsando Enter (o el botón). Hace un `fetch` a la ruta `/search/shows` de la API, limpia la pantalla y muestra los resultados nuevos.
+- **El Modal:** A cada "tarjetita" de serie le añado un escuchador de clics. Cuando pulsas, recojo los datos de esa serie (resumen, estado original, imagen grande), se los meto machacando el HTML interno del `modal-content` y le quito la clase que lo mantenía oculto.
+
+En resumen: los tres lenguajes trabajan unidos para pedir datos a un servidor ajeno y mostrarlos de forma limpia y responsiva.
