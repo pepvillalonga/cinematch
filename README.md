@@ -13,13 +13,15 @@ He dividido el archivo `index.html` en partes lógicas para que el código quede
 - **Modal:** Un div oculto (`modal-overlay`) preparado para funcionar como ventana flotante. Tiene la estructura básica vacía (imagen, títulos, resumen) esperando a que el JS la rellene al hacer clic en una serie.
 - **Footer:** Un pequeño pie de página.
 
-## 2. El diseño (CSS) - ¡Pendiente para más adelante!
+## 2. El diseño (CSS)
 
-De momento la página se ve un poco fea porque solo tiene el HTML puro. En las próximas clases me encargaré de crear el archivo `style.css` para darle un diseño moderno y oscuro. Mi idea para cuando lo haga es:
+En `style.css` he hecho un diseño oscuro tipo app de cine. Lo que he usado:
 
-- Usar variables CSS para definir una buena paleta de colores.
-- Usar Flexbox para alinear el buscador y los filtros.
-- Usar CSS Grid para que las tarjetas de las series se adapten a cualquier tamaño de pantalla.
+- He definido **variables CSS** en el `:root` para tener la paleta de colores centralizada (fondo oscuro, color de acento rojo, gris para texto secundario, etc). Así si quiero cambiar algún color solo lo toco en un sitio.
+- He usado **Flexbox** para alinear la barra de búsqueda (input + botón) y para los botones de filtros, que se van colocando en fila y si no caben saltan a la siguiente.
+- He usado **CSS Grid** en el `shows-grid` con `repeat(auto-fill, minmax(180px, 1fr))` para que las tarjetas se pongan solas en columnas y se adapten al tamaño de la pantalla sin necesidad de muchas media queries.
+- Las tarjetas tienen bordes redondeados, la imagen ocupa todo el ancho y los géneros se muestran como etiquetas pequeñas con `flex-wrap: wrap` para que no se salgan de la tarjeta.
+- El modal usa `position: fixed` para quedarse por encima de todo, con un fondo semitransparente. Por defecto está en `display: none` y cuando se le añade la clase `.visible` cambia a `display: flex`.
 
 ## 3. La funcionalidad (JavaScript)
 
